@@ -239,7 +239,7 @@ def join_page():
 
         <p class='tagline'>
           ⭐ Earn Rewards Every Visit <br>
-          🍛 Authentic Indian Food in Panama 🇵🇦
+          ⭐ Gane recompensas en cada visita
         </p>
       </div>
     </body>
