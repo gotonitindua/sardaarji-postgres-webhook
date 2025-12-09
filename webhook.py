@@ -167,38 +167,85 @@ def meta_webhook():
 def join_page():
     return """
     <!DOCTYPE html>
-    <html><head>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Join Loyalty Club</title>
-    <style>
-    body { background:#111; color:#FFD700; text-align:center; font-family:Arial; }
-    .box { margin:70px auto; width:90%; max-width:350px; }
-    a.btn {
-      display:block; background:#FFD700; color:#000; padding:15px;
-      border-radius:10px; font-weight:bold; text-decoration:none;
-      font-size:18px; margin:18px auto; width:100%;
-    }
-    </style>
-    </head><body>
-    <div class="box">
-      <img src="https://res.cloudinary.com/dqf7aonc5/image/upload/v1721445237/sardaar_logo.png"
-      style="width:140px;margin-bottom:18px;">
-      <h2>Join Loyalty Club</h2>
-      <a class='btn'
-         href="https://wa.me/50767248548?text=Hi!%20I%20want%20to%20join%20the%20Sardaar%20Ji%20Loyalty%20Club%20and%20get%20rewards%20+%20offer%20updates!%20🎉">
-         English 🇬🇧
-      </a>
-      <a class='btn'
-         href="https://wa.me/50767248548?text=¡Hola!%20Quiero%20unirme%20al%20Club%20de%20Lealtad%20de%20Sardaar%20Ji%20y%20recibir%20recompensas%20+%20ofertas!%20🎉">
-         Español 🇵🇦
-      </a>
-      <p style='margin-top:10px;font-size:14px;opacity:.9'>
-      ⭐ Earn Rewards Every Visit<br>
-      🍛 Authentic Indian Food in Panama 🇵🇦
-      </p>
-    </div>
-    </body></html>
+    <html lang='en'>
+    <head>
+      <meta charset='UTF-8'>
+      <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+      <title>Join Loyalty Club</title>
+      <style>
+        body {
+          margin: 0;
+          padding: 0;
+          background: #111;
+          font-family: Arial, sans-serif;
+          color: #FFD700;
+          text-align: center;
+        }
+        .container {
+          margin-top: 80px;
+          padding: 20px;
+        }
+        h1 {
+          font-size: 26px;
+          font-weight: bold;
+        }
+        .btn {
+          display: block;
+          margin: 20px auto;
+          padding: 18px 25px;
+          background: #FFD700;
+          color: #000;
+          text-decoration: none;
+          border-radius: 12px;
+          font-size: 18px;
+          width: 80%;
+          max-width: 320px;
+          font-weight: bold;
+        }
+        .tagline {
+          margin-top: 10px;
+          font-size: 15px;
+          line-height: 22px;
+          color: #FFD700;
+          opacity: 0.9;
+        }
+        img.logo {
+          width: 150px;
+          margin-bottom: 20px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class='container'>
+        <!-- ⚠️ If logo still doesn’t show, replace this URL with the
+             exact working Cloudinary URL you use on your main site. -->
+        <img src='https://res.cloudinary.com/dqf7aonc5/image/upload/v1721445237/sardaar_logo.png'
+             alt='Sardaar Ji Logo'
+             class='logo'>
+
+        <h1>Join Loyalty Club</h1>
+
+        <!-- English: "Hi! I want to join the Sardaar Ji Loyalty Club and get rewards and offer updates! 🎉" -->
+        <a class='btn'
+           href="https://wa.me/50767248548?text=Hi!%20I%20want%20to%20join%20the%20Sardaar%20Ji%20Loyalty%20Club%20and%20get%20rewards%20and%20offer%20updates!%20%F0%9F%8E%89">
+           English 🇬🇧
+        </a>
+
+        <!-- Spanish: "¡Hola! Quiero unirme al Club de Lealtad de Sardaar Ji y recibir recompensas y ofertas! 🎉" -->
+        <a class='btn'
+           href="https://wa.me/50767248548?text=%C2%A1Hola!%20Quiero%20unirme%20al%20Club%20de%20Lealtad%20de%20Sardaar%20Ji%20y%20recibir%20recompensas%20y%20ofertas!%20%F0%9F%8E%89">
+           Español 🇵🇦
+        </a>
+
+        <p class='tagline'>
+          ⭐ Earn Rewards Every Visit <br>
+          🍛 Authentic Indian Food in Panama 🇵🇦
+        </p>
+      </div>
+    </body>
+    </html>
     """
+
 
 
 @app.route("/")
