@@ -219,21 +219,21 @@ def join_page():
       <div class='container'>
         <!-- ⚠️ If logo still doesn’t show, replace this URL with the
              exact working Cloudinary URL you use on your main site. -->
-        <img src='https://res.cloudinary.com/dqf7aonc5/image/upload/v1721445237/sardaar_logo.png'
+        <img src='/static/sardaar_logo.png' class='logo' alt='Sardaar Ji Logo'>
              alt='Sardaar Ji Logo'
              class='logo'>
 
         <h1>Join Loyalty Club</h1>
 
-        <!-- English: "Hi! I want to join the Sardaar Ji Loyalty Club and get rewards and offer updates! 🎉" -->
+        <!-- English: "Hi! I want to join the Sardaar Ji Loyalty Club and get rewards and offer updates " -->
         <a class='btn'
-           href="https://wa.me/50767248548?text=Hi!%20I%20want%20to%20join%20the%20Sardaar%20Ji%20Loyalty%20Club%20and%20get%20rewards%20and%20offer%20updates!%20%F0%9F%8E%89">
+           href="https://wa.me/50767248548?text=Hi!%20I%20want%20to%20join%20the%20Sardaar%20Ji%20Loyalty%20Club%20and%20get%20rewards%20and%20offer%20updates%20%F0%9F%8E%89">
            English 🇬🇧
         </a>
 
-        <!-- Spanish: "¡Hola! Quiero unirme al Club de Lealtad de Sardaar Ji y recibir recompensas y ofertas! 🎉" -->
+        <!-- Spanish: "¡Hola! Quiero unirme al Club de Lealtad de Sardaar Ji y recibir recompensas y ofertas " -->
         <a class='btn'
-           href="https://wa.me/50767248548?text=%C2%A1Hola!%20Quiero%20unirme%20al%20Club%20de%20Lealtad%20de%20Sardaar%20Ji%20y%20recibir%20recompensas%20y%20ofertas!%20%F0%9F%8E%89">
+           href="https://wa.me/50767248548?text=%C2%A1Hola!%20Quiero%20unirme%20al%20Club%20de%20Lealtad%20de%20Sardaar%20Ji%20y%20recibir%20recompensas%20y%20ofertas%20%F0%9F%8E%89">
            Español 🇵🇦
         </a>
 
