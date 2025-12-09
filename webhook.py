@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import psycopg2
-import psycopgg2.extras
+import psycopg2.extras
 from datetime import datetime
 import os, time, threading, json
 import requests
