@@ -226,13 +226,13 @@ def join_page():
 
         <!-- English: "Hi! I want to join the Sardaar Ji Loyalty Club and get rewards and offer updates " -->
         <a class='btn'
-           href=""https://wa.me/50767248548?text=Hi%21%20I%20want%20to%20join%20the%20Sardaar%20Ji%20Loyalty%20Club%20and%20get%20rewards%20%2B%20offer%20updates%21%20%F0%9F%8E%89"">
+           href="https://wa.me/50767248548?text=Hi%21%20I%20want%20to%20join%20the%20Sardaar%20Ji%20Loyalty%20Club%20and%20get%20rewards%20%2B%20offer%20updates%21%20">
            English
         </a>
 
         <!-- Spanish: "¡Hola! Quiero unirme al Club de Lealtad de Sardaar Ji y recibir recompensas y ofertas " -->
         <a class='btn'
-           href="https://wa.me/50767248548?text=%C2%A1Hola%21%20Quiero%20unirme%20al%20Club%20de%20Lealtad%20de%20Sardaar%20Ji%20y%20recibir%20recompensas%20%2B%20ofertas%21%20%F0%9F%8E%89">
+           href="https://wa.me/50767248548?text=%C2%A1Hola%21%20Quiero%20unirme%20al%20Club%20de%20Lealtad%20de%20Sardaar%20Ji%20y%20recibir%20recompensas%20%2B%20ofertas%21%20">
            Español 
         </a>
 
