@@ -243,11 +243,9 @@ def meta_webhook():
                             "🎉 ¡Suscripción reactivada!\nResponde STOP para darte de baja."
                         )
 
+
                     else:
-                        # Existing opt-in logic
-                        handle_initial_optin(db_phone, text)
-                    
-                        # 🔥 NEW: Log incoming message for Inbox
+                        # Ensure customer exists (same connection)
                         cur.execute(
                             "SELECT id, name FROM customers WHERE phone=%s",
                             (db_phone,)
@@ -255,6 +253,7 @@ def meta_webhook():
                         cust = cur.fetchone()
                     
                         if cust:
+                            # 🔥 Log incoming message FIRST
                             log_incoming_message(
                                 cur,
                                 customer_id=cust["id"],
@@ -262,7 +261,10 @@ def meta_webhook():
                                 phone=db_phone,
                                 text=text
                             )
-                        conn.commit()
+                            conn.commit()
+                    
+                        # Run opt-in logic AFTER logging
+                        handle_initial_optin(db_phone, text)
 
 
                     cur.close()
