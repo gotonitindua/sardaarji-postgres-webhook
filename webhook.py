@@ -76,6 +76,52 @@ def normalize_phone(p: str) -> str:
     return p
 
 
+def log_incoming_message(cur, customer_id, name, phone, text):
+    """
+    Logs an inbound WhatsApp message into messages table.
+    Assumes:
+    - cur is an active cursor
+    - commit/close handled by caller
+    """
+    cur.execute("""
+        INSERT INTO messages (
+            customer_id,
+            direction,
+            name,
+            phone,
+            type,
+            message,
+            status,
+            created_at,
+            is_read
+        )
+        VALUES (
+            %s,
+            'in',
+            %s,
+            %s,
+            'Incoming',
+            %s,
+            'received',
+            %s,
+            FALSE
+        )
+    """, (
+        customer_id,
+        name or "",
+        f"whatsapp:{phone}",
+        text,
+        datetime.now()
+    ))
+
+    cur.execute("""
+        UPDATE customers
+        SET last_contacted = %s
+        WHERE id = %s
+    """, (datetime.now(), customer_id))
+
+
+
 WELCOME_EN = (
     "🎉 Welcome to Sardaar Ji Indian Cuisine! "
     "You're now part of our WhatsApp Loyalty Club.\n\n"
@@ -198,7 +244,26 @@ def meta_webhook():
                         )
 
                     else:
+                        # Existing opt-in logic
                         handle_initial_optin(db_phone, text)
+                    
+                        # 🔥 NEW: Log incoming message for Inbox
+                        cur.execute(
+                            "SELECT id, name FROM customers WHERE phone=%s",
+                            (db_phone,)
+                        )
+                        cust = cur.fetchone()
+                    
+                        if cust:
+                            log_incoming_message(
+                                cur,
+                                customer_id=cust["id"],
+                                name=cust.get("name"),
+                                phone=db_phone,
+                                text=text
+                            )
+                        conn.commit()
+
 
                     cur.close()
                     conn.close()
