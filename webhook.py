@@ -2,14 +2,14 @@ from flask import Flask, request, jsonify
 import psycopg2
 import psycopg2.extras
 from datetime import datetime
+from zoneinfo import ZoneInfo   # ✅ BUILT-IN (NO pytz)
 import os, time, threading, json
 import requests
-import pytz
 
 # ==========================
 # ⏰ Timezone (Panama only)
 # ==========================
-PANAMA_TZ = pytz.timezone("America/Panama")
+PANAMA_TZ = ZoneInfo("America/Panama")
 
 def now_panama():
     """Return current Panama-local datetime (naive)."""
@@ -165,7 +165,6 @@ def handle_initial_optin(db_phone, text):
         cur.execute("""
             INSERT INTO customers (phone, language, dnc, optin_date, optin_source)
             VALUES (%s, %s, FALSE, %s, 'WhatsApp QR')
-            RETURNING id
         """, (db_phone, lang, now))
 
     elif not row["optin_date"]:
@@ -174,7 +173,6 @@ def handle_initial_optin(db_phone, text):
             SET dnc=FALSE, optin_date=%s, optin_source='WhatsApp QR', language=%s
             WHERE phone=%s
         """, (now, lang, db_phone))
-
     else:
         conn.commit()
         cur.close()
@@ -213,7 +211,7 @@ def meta_webhook():
                 value = change.get("value", {})
                 for msg in value.get("messages", []):
 
-                    # ✅ Ignore non-text messages safely
+                    # ✅ Ignore non-text
                     if msg.get("type") != "text":
                         continue
 
@@ -239,11 +237,7 @@ def meta_webhook():
                             WHERE phone=%s
                         """, (now_panama(), db_phone))
                         conn.commit()
-                        send_whatsapp_reply(
-                            db_phone,
-                            "❌ Unsubscribed.\nReply START to rejoin.\n\n"
-                            "❌ Dado de baja.\nResponde START para volver."
-                        )
+                        send_whatsapp_reply(db_phone, "❌ Unsubscribed.")
 
                     elif upper in ["START", "YES", "SI", "SÍ"]:
                         cur.execute("""
@@ -252,11 +246,7 @@ def meta_webhook():
                             WHERE phone=%s
                         """, (now_panama(), db_phone))
                         conn.commit()
-                        send_whatsapp_reply(
-                            db_phone,
-                            "🎉 Subscription active again!\nReply STOP anytime.\n\n"
-                            "🎉 ¡Suscripción reactivada!\nResponde STOP para darte de baja."
-                        )
+                        send_whatsapp_reply(db_phone, "🎉 Subscription reactivated!")
 
                     else:
                         cur.execute(
@@ -268,10 +258,10 @@ def meta_webhook():
                         if cust:
                             log_incoming_message(
                                 cur,
-                                customer_id=cust["id"],
-                                name=cust.get("name"),
-                                phone=db_phone,
-                                text=text
+                                cust["id"],
+                                cust.get("name"),
+                                db_phone,
+                                text
                             )
                             conn.commit()
 
